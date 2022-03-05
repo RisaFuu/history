@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 const useMemory = (filtered) => {
   const [viewedList, setViewedList] = useState([0])
   const [details, setDetails] = useState(filtered[0])
@@ -17,6 +18,7 @@ const useMemory = (filtered) => {
       </>
     ),
     viewedList,
+    details: details
   }
 }
 

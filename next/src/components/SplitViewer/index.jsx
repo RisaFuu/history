@@ -1,11 +1,13 @@
 import ImageGallery from 'react-image-gallery'
 import { useState, useRef } from 'react'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import config from '../../../../config.json'
 import { getExt } from '../../utils'
 import SlippyMap from '../SlippyMap'
 import Video from '../Video'
+
 
 const Split = styled.section`
   display: grid;
@@ -73,6 +75,7 @@ function SplitViewer({ items, refImageGallery, setViewed = () => {} }) {
   return (
     <Split>
       <Left key="splitLeft">
+      <Link href='/demo/sample/nearby'>
         <ImageGallery
           ref={refImageGallery}
           onBeforeSlide={handleBeforeSlide}
@@ -83,6 +86,7 @@ function SplitViewer({ items, refImageGallery, setViewed = () => {} }) {
           slideDuration={550}
           lazyLoad
         />
+    </Link>
       </Left>
       <Right key="splitRight" ref={refMapBox}>
         <SlippyMap items={items} centroid={items[memoryIndex]} />

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 import { useRef } from 'react'
+import Link from 'next/link'
 
 import { get as getAlbum } from '../../src/lib/album'
 import { get as getAlbums } from '../../src/lib/albums'
@@ -43,6 +44,9 @@ const Wrapper = styled.ul`
   list-style: none;
   padding-left: 2px;
 `
+const MyLink = styled.a`
+color: orange;
+`
 
 function AlbumPage({ items = [] }) {
   const refImageGallery = useRef(null)
@@ -50,7 +54,7 @@ function AlbumPage({ items = [] }) {
     filtered,
     searchBox,
   } = useSearch(items)
-  const { setViewed, memoryHtml, viewedList } = useMemory(filtered)
+  const { setViewed, memoryHtml, viewedList, details } = useMemory(filtered)
 
   function selectThumb(index) {
     refImageGallery.current.slideToIndex(index)
@@ -64,7 +68,7 @@ function AlbumPage({ items = [] }) {
       </Head>
       {searchBox}
       <SplitViewer setViewed={setViewed} items={filtered} refImageGallery={refImageGallery} />
-      {memoryHtml}
+      <MyLink href={'/demo/sample/nearby?location=' + details.location}><a>{memoryHtml}</a></MyLink>
       <Wrapper>
         {filtered.map((item, index) => (
           <ThumbImg
@@ -82,3 +86,4 @@ function AlbumPage({ items = [] }) {
 }
 
 export default AlbumPage
+export {useMemory}
